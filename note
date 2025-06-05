@@ -1,0 +1,74 @@
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+
+const url = 'http://localhost:3500/posts'
+
+const Axios = () => {
+    const [title, setTitle] = useState('')
+    const [posts, setPosts] = useState([])
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(url)
+                setPosts(response.data)
+            } catch (err) {
+                console.error(err)
+            }
+        }
+        fetchData()
+    }, [])
+
+    const onDelete = async (id) => {
+        try {
+            await axios.delete(`${url}/${id}`)
+            setPosts((prev) => prev.filter((p) => p.id !== id))
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
+    const onAdd = async () => {
+        if (!title.trim()) return
+        try {
+            const response = await axios.post(url, { title })
+            setPosts((prev) => [...prev, response.data])
+            setTitle('')
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            onAdd()
+        }
+    }
+
+    return (
+        <div className="p-4">
+            <h1 className="text-xl font-bold mb-4">Axios</h1>
+            <input
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                onKeyDown={handleKeyPress}
+                placeholder="Enter title and press Enter"
+                className="border p-2 mb-4 block w-full"
+            />
+            {posts.map((item) => (
+                <div key={item.id} className="mb-2 flex items-center justify-between">
+                    <span>{item.title}</span>
+                    <button
+                        onClick={() => onDelete(item.id)}
+                        className="bg-red-400 text-white px-2 py-1 rounded"
+                    >
+                        X
+                    </button>
+                </div>
+            ))}
+        </div>
+    )
+}
+
+export default Axios

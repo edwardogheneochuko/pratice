@@ -1,0 +1,37 @@
+{
+  "posts": [
+    {
+      "id": "1",
+      "title": "open and close"
+    },
+    {
+      "id": "2",
+      "title": "absolute cinema"
+    },
+    {
+      "id": "e8cf",
+      "name": "ogheneochuko",
+      "email": "headiesed@gmail.com"
+    },
+    {
+      "id": "5994",
+      "name": "ogheneochuko",
+      "email": "headiesed@gmail.com"
+    },
+    {
+      "id": "c78e",
+      "name": "khazz",
+      "email": "mistubushi"
+    },
+    {
+      "id": "b418",
+      "name": "nasna",
+      "email": "nabel"
+    },
+    {
+      "id": "e10f",
+      "name": "john cena ",
+      "email": "email@email.com"
+    }
+  ]
+}
